@@ -6,7 +6,6 @@ import pyautogui
 
 from time import sleep
 from PIL import Image, ImageGrab
-from fuzzywuzzy import fuzz
 # from fuzzywuzzy import process
 # from traceback import format_exc
 from json import load as json_load
@@ -14,7 +13,12 @@ import importlib
 import sys
 import os
 
+
+from compare import ImageCompare
+
 COMPARE_THRESHOLD = 80
+
+imageCompare = ImageCompare()
 
 
 def mkpath(*paths):
@@ -50,65 +54,6 @@ def take_screenshot(path="screen.png"):
     # win32gui.ReleaseDC(hwnd, hwndDC)
 
     # return image
-
-
-def compare(image1, image2, crop=None, resize=(8, 8), bw_threshold=None):
-    # image1 = Image.open(file1)
-    # image2 = Image.open(file2)
-
-    if crop is not None:
-        image1 = image1.crop(crop)
-        image2 = image2.crop(crop)
-
-    image1 = image1.resize(resize, Image.NEAREST).convert('L')
-    image2 = image2.resize(resize, Image.NEAREST).convert('L')
-
-    pixel_data = list(image1.getdata())
-    if bw_threshold is None:
-        avg_pixel = sum(pixel_data) / len(pixel_data)
-    else:
-        # image1.show()
-        avg_pixel = bw_threshold
-
-    bits = "".join(str(int(px >= avg_pixel)) for px in pixel_data)
-    image1_hash = str(hex(int(bits, 2)))[2:][::-1].upper()
-
-    pixel_data = list(image2.getdata())
-    if bw_threshold is None:
-        avg_pixel = sum(pixel_data) / len(pixel_data)
-    else:
-        # image2.show()
-        avg_pixel = bw_threshold
-
-    bits = "".join(str(int(px >= avg_pixel)) for px in pixel_data)
-    image2_hash = str(hex(int(bits, 2)))[2:][::-1].upper()
-
-    # image1.show()
-    # image2.show()
-
-    # print(image1_hash)
-    # print()
-    # print(image2_hash)
-    # print(fuzz.ratio(image1_hash, image2_hash))
-
-    # if len(image1_hash) >= len(image2_hash):
-    #     result = min(
-    #         sum(abs(ord(image1_hash[start + i]) - ord(image2_hash[i])) for i in range(len(image2_hash)))
-    #         for start in range(len(image1_hash) - len(image2_hash) + 1)
-    #     )
-    # else:
-    #     result = min(
-    #         sum(abs(ord(image1_hash[i]) - ord(image2_hash[start + i])) for i in range(len(image1_hash)))
-    #         for start in range(len(image2_hash) - len(image1_hash) + 1)
-    #     )
-
-    # image1.show()
-    # image1.save("result.png")
-
-    image1.close()
-    image2.close()
-
-    return fuzz.ratio(image1_hash, image2_hash)
 
 
 def execute_action(action, *args):
@@ -163,7 +108,7 @@ def main():
         for task_name in tasks:
             task_data = tasks[task_name]
 
-            comparison = compare(image, Image.open(mkpath("tasks", task_name, task_data["trigger"])), task_data["crop"])
+            comparison = imageCompare.compare(image, mkpath("tasks", task_name, task_data["trigger"]), task_data["crop"])
 
             if comparison > best_comparison:
                 best_comparison = comparison
@@ -183,11 +128,11 @@ def main():
 
         image.close()
 
-        print("Iteration")
+        # print("Iteration")
 
 
 if __name__ == "__main__":
     main()
     # sleep(3)
     # take_screenshot().save("reference.png")
-    # print("Compare:", compare(Image.open("tasks/swipe_card/reference.png"), take_screenshot(), [512, 92, 1407, 968]))
+    # print("Compare:", compare("tasks/swipe_card/reference.png", take_screenshot(), [512, 92, 1407, 968]))

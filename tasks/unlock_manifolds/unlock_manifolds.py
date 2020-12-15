@@ -1,5 +1,4 @@
-from Among_Us import mkpath, compare, execute_action
-from PIL import Image
+from Among_Us import mkpath, imageCompare, execute_action
 import os
 
 def run(screenshot):
@@ -20,9 +19,9 @@ def run(screenshot):
         for filename in os.listdir(mkpath("tasks", "unlock_manifolds", "numbers")):
             number = int(os.path.splitext(filename)[0])
 
-            comparison = compare(
+            comparison = imageCompare.compare(
                 image,
-                Image.open(mkpath("tasks", "unlock_manifolds", "numbers", filename)),
+                mkpath("tasks", "unlock_manifolds", "numbers", filename),
                 resize=(32, 32),
                 bw_threshold=80
             )
@@ -47,5 +46,7 @@ def run(screenshot):
             execute_action("mouse_move", 589 + 153 * (pos % 5) + cell_size[0] // 2, 552 + cell_size[1] // 2)
         execute_action("mouse_click")
         # execute_action("wait", 0.5)
+
+    execute_action("wait", 1)
 
     return True
