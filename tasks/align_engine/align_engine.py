@@ -10,7 +10,7 @@ def run(screenshot):
 
     screenshot = screenshot.crop(crop).convert('L')
 
-    up_pos, down_pos = float("-inf"), float("inf")
+    down_pos, up_pos = float('inf'), float("-inf")
 
     for y in range(screenshot.size[1]):
         x = count_x(screenshot, y)
@@ -18,6 +18,9 @@ def run(screenshot):
         if 62 <= screenshot.getpixel((x, y)) <= 70:
             up_pos = max(up_pos, y)
             down_pos = min(down_pos, y)
+
+    if down_pos == float("inf") or up_pos == float("-inf"):
+        return False
 
     center_pos = (down_pos + up_pos) // 2
 

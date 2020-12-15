@@ -1,5 +1,6 @@
 {
 	"crop": [511, 91, 1409, 134],
 	"trigger": "reference.png",
+	"trigger_threshold": 90,
 	"actions": "prime_shields"
 }

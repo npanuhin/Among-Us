@@ -16,7 +16,7 @@ import os
 
 from compare import ImageCompare
 
-INITIAL_COMPARE_THRESHOLD = 80
+INITIAL_COMPARE_THRESHOLD = 85
 
 imageCompare = ImageCompare()
 
@@ -117,6 +117,8 @@ def main():
 
         if best_task is not None:
             print("Triggered task \"{}\"".format(best_task))
+
+            execute_action("wait", 0.1)
 
             actions = tasks[best_task]["actions"]
 

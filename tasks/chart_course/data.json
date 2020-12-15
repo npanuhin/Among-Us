@@ -1,0 +1,6 @@
+{
+	"crop": [397, 203, 1521, 875],
+	"trigger": "reference.png",
+	"trigger_threshold": 80,
+	"actions": "chart_course"
+}
