@@ -126,6 +126,7 @@ def main():
             else:
                 if not actions.run(screenshot):
                     print("Task \"{}\" failed!".format(best_task))
+                    execute_action("wait", 1)
 
         screenshot.close()
 
