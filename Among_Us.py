@@ -1,11 +1,11 @@
 import pyautogui
-import win32gui
-from win32api import GetSystemMetrics
-import win32con
-import win32ui
+# import win32gui
+# from win32api import GetSystemMetrics
+# import win32con
+# import win32ui
 
 from time import sleep
-from PIL import Image
+from PIL import Image, ImageGrab
 from fuzzywuzzy import fuzz
 # from fuzzywuzzy import process
 # from traceback import format_exc
@@ -22,32 +22,34 @@ def mkpath(*paths):
 
 
 def take_screenshot(path="screen.png"):
-    hwnd = win32gui.GetDesktopWindow()
-    width = GetSystemMetrics(win32con.SM_CXVIRTUALSCREEN)
-    height = GetSystemMetrics(win32con.SM_CYVIRTUALSCREEN)
-    x = GetSystemMetrics(win32con.SM_XVIRTUALSCREEN)
-    y = GetSystemMetrics(win32con.SM_YVIRTUALSCREEN)
+    return ImageGrab.grab()
 
-    hwndDC = win32gui.GetWindowDC(hwnd)
-    mfcDC = win32ui.CreateDCFromHandle(hwndDC)
-    saveDC = mfcDC.CreateCompatibleDC()
+    # hwnd = win32gui.GetDesktopWindow()
+    # width = GetSystemMetrics(win32con.SM_CXVIRTUALSCREEN)
+    # height = GetSystemMetrics(win32con.SM_CYVIRTUALSCREEN)
+    # x = GetSystemMetrics(win32con.SM_XVIRTUALSCREEN)
+    # y = GetSystemMetrics(win32con.SM_YVIRTUALSCREEN)
 
-    saveBitMap = win32ui.CreateBitmap()
-    saveBitMap.CreateCompatibleBitmap(mfcDC, width, height)
-    saveDC.SelectObject(saveBitMap)
-    saveDC.BitBlt((0, 0), (width, height), mfcDC, (x, y), win32con.SRCCOPY)
+    # hwndDC = win32gui.GetWindowDC(hwnd)
+    # mfcDC = win32ui.CreateDCFromHandle(hwndDC)
+    # saveDC = mfcDC.CreateCompatibleDC()
 
-    # saveBitMap.SaveBitmapFile(saveDC, 'screenshot.bmp')
+    # saveBitMap = win32ui.CreateBitmap()
+    # saveBitMap.CreateCompatibleBitmap(mfcDC, width, height)
+    # saveDC.SelectObject(saveBitMap)
+    # saveDC.BitBlt((0, 0), (width, height), mfcDC, (x, y), win32con.SRCCOPY)
 
-    bmpinfo = saveBitMap.GetInfo()
-    bmpstr = saveBitMap.GetBitmapBits(True)
-    image = Image.frombuffer('RGB', (bmpinfo['bmWidth'], bmpinfo['bmHeight']), bmpstr, 'raw', 'BGRX', 0, 1)
+    # # saveBitMap.SaveBitmapFile(saveDC, 'screenshot.bmp')
 
-    mfcDC.DeleteDC()
-    saveDC.DeleteDC()
-    win32gui.ReleaseDC(hwnd, hwndDC)
+    # bmpinfo = saveBitMap.GetInfo()
+    # bmpstr = saveBitMap.GetBitmapBits(True)
+    # image = Image.frombuffer('RGB', (bmpinfo['bmWidth'], bmpinfo['bmHeight']), bmpstr, 'raw', 'BGRX', 0, 1)
 
-    return image
+    # mfcDC.DeleteDC()
+    # saveDC.DeleteDC()
+    # win32gui.ReleaseDC(hwnd, hwndDC)
+
+    # return image
 
 
 def compare(image1, image2, crop=None, resize=(8, 8), bw_threshold=None):
@@ -148,7 +150,8 @@ def main():
 
         tasks[task_name] = task_data
 
-    print(tasks)
+    for task_name in tasks:
+        print("{}:\n{}".format(task_name, tasks[task_name]))
 
     print("Starting...")
 
