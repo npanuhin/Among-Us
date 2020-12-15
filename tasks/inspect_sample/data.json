@@ -1,0 +1,12 @@
+{
+	"crop": [513, 90, 1408, 801],
+	"trigger": "reference.png",
+	"actions": [
+		["mouse_move", 1260, 935],
+		["mouse_click"],
+		["wait", 0.2],
+		["press_key", "esc"],
+
+		["wait", 2]
+	]
+}
