@@ -1,7 +1,7 @@
 from Among_Us import mkpath, take_screenshot, imageCompare, execute_action
 
 
-def run(image):
+def run(screenshot):
     compare_box = [970, 204, 1558, 875]
 
     left_box = (482, 424, 830, 772)

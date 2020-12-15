@@ -1,0 +1,5 @@
+{
+	"crop": [511, 91, 1409, 134],
+	"trigger": "reference.png",
+	"actions": "prime_shields"
+}

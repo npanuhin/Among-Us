@@ -16,7 +16,7 @@ import os
 
 from compare import ImageCompare
 
-COMPARE_THRESHOLD = 80
+INITIAL_COMPARE_THRESHOLD = 80
 
 imageCompare = ImageCompare()
 
@@ -101,20 +101,21 @@ def main():
     print("Starting...")
 
     while True:
-        image = take_screenshot()
+        screenshot = take_screenshot()
 
         best_task, best_comparison = None, float("-inf")
 
         for task_name in tasks:
             task_data = tasks[task_name]
 
-            comparison = imageCompare.compare(image, mkpath("tasks", task_name, task_data["trigger"]), task_data["crop"])
+            comparison = imageCompare.compare(screenshot, mkpath("tasks", task_name, task_data["trigger"]), task_data["crop"])
 
-            if comparison > best_comparison:
+            if comparison > (task_data["trigger_threshold"] if "trigger_threshold" in task_data else INITIAL_COMPARE_THRESHOLD) and \
+                    comparison > best_comparison:
                 best_comparison = comparison
                 best_task = task_name
 
-        if best_comparison >= COMPARE_THRESHOLD:
+        if best_task is not None:
             print("Triggered task \"{}\"".format(best_task))
 
             actions = tasks[best_task]["actions"]
@@ -123,16 +124,18 @@ def main():
                 for action in actions:
                     execute_action(action[0], *action[1:])
             else:
-                if not actions.run(image):
-                    print("Task \"{}\" failed!".format(task_name))
+                if not actions.run(screenshot):
+                    print("Task \"{}\" failed!".format(best_task))
 
-        image.close()
+        screenshot.close()
 
         # print("Iteration")
 
 
 if __name__ == "__main__":
     main()
+
     # sleep(3)
     # take_screenshot().save("reference.png")
+
     # print("Compare:", compare("tasks/swipe_card/reference.png", take_screenshot(), [512, 92, 1407, 968]))
