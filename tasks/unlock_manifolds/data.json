@@ -1,0 +1,5 @@
+{
+	"crop": [514, 323, 1406, 756],
+	"trigger": "reference.png",
+	"actions": "unlock_manifolds"
+}
