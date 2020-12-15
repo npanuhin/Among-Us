@@ -14,8 +14,8 @@ def run(screenshot, task_data):
 
     while True:
         screenshot = take_screenshot()
-        if imageCompare.compare(screenshot, mkpath("tasks", "start_reactor", "waiting.png"), crop=task_data["trigger_region"]) >= \
-                imageCompare.compare(screenshot, mkpath("tasks", "start_reactor", "reference.png"), crop=task_data["trigger_region"]) and order:
+        if imageCompare.compare(screenshot, mkpath("task", "start_reactor", "waiting.png"), crop=task_data["trigger_region"]) >= \
+                imageCompare.compare(screenshot, mkpath("task", "start_reactor", "reference.png"), crop=task_data["trigger_region"]) and order:
             # print(order)
 
             for x, y in order:

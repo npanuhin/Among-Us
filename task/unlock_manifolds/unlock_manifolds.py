@@ -12,16 +12,16 @@ def run(screenshot, task_data):
 
     for i, image in enumerate(numbers):
         # image = image.resize((32, 32), NEAREST).convert('1')
-        # image.save(mkpath("tasks", "unlock_manifolds", "numbers", str(i) + "_.png"))
+        # image.save(mkpath("task", "unlock_manifolds", "numbers", str(i) + "_.png"))
 
         best_number, best_comparison = None, float("-inf")
 
-        for filename in os.listdir(mkpath("tasks", "unlock_manifolds", "numbers")):
+        for filename in os.listdir(mkpath("task", "unlock_manifolds", "numbers")):
             number = int(os.path.splitext(filename)[0])
 
             comparison = imageCompare.compare(
                 image,
-                mkpath("tasks", "unlock_manifolds", "numbers", filename),
+                mkpath("task", "unlock_manifolds", "numbers", filename),
                 resize=(32, 32),
                 bw_threshold=80
             )
@@ -30,11 +30,9 @@ def run(screenshot, task_data):
                 best_comparison = comparison
                 best_number = number
 
-        print(best_number)
-
         order[best_number - 1] = i
 
-    print(order)
+    print("Orger:", " ".join(map(str, order)))
 
     if None in order:
         return False
