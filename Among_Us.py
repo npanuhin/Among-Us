@@ -5,7 +5,7 @@ import pyautogui
 # import win32ui
 
 from time import sleep
-from PIL import Image, ImageGrab
+from PIL import ImageGrab
 # from fuzzywuzzy import process
 # from traceback import format_exc
 from json import load as json_load

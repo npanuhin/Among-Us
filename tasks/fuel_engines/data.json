@@ -4,7 +4,7 @@
 	"actions": [
 		["mouse_move", 1466, 880],
 		["mouse_press"],
-		["wait", 4],
+		["wait", 3],
 		["mouse_release"],
 
 		["wait", 2]

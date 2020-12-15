@@ -1,0 +1,5 @@
+{
+	"crop": [970, 204, 1558, 875],
+	"trigger": "reference.png",
+	"actions": "start_reactor"
+}
