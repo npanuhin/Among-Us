@@ -1,5 +1,0 @@
-{
-	"crop": [514, 95, 1406, 986],
-	"trigger": "reference.png",
-	"actions": "reactor_meltdown"
-}

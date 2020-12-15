@@ -1,0 +1,5 @@
+{
+	"trigger_region": [510, 90, 1410, 990],
+	"trigger": "reference.png",
+	"actions": "fix_wiring"
+}

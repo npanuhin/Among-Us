@@ -83,53 +83,55 @@ def execute_action(action, *args):
 def main():
     tasks = {}
 
-    for task_name in os.listdir("tasks"):
+    for action_type in ("task", "sabotage"):
+        for task_name in os.listdir(action_type):
+            with open(mkpath(action_type, task_name, "data.json"), 'r', encoding="utf-8") as file:
+                task_data = json_load(file, encoding="utf-8")
 
-        with open(mkpath("tasks", task_name, "data.json"), 'r', encoding="utf-8") as file:
-            task_data = json_load(file, encoding="utf-8")
+            if isinstance(task_data["actions"], str):
+                sys.path.append(mkpath(action_type, task_name))
+                task_data["actions"] = importlib.import_module(task_name)
 
-        if isinstance(task_data["actions"], str):
-            sys.path.append(mkpath("tasks", task_name))
-            task_data["actions"] = importlib.import_module(task_name)
+            if isinstance(task_data["trigger"], str):
+                task_data["trigger"] = mkpath(action_type, task_name, task_data["trigger"])
 
-        tasks[task_name] = task_data
+            tasks[task_name] = task_data
 
-    for task_name in tasks:
-        print("{}:\n{}".format(task_name, tasks[task_name]))
+    for task_name, task_data in tasks.items():
+        print("{}:\n{}".format(task_name, task_data))
 
     print("Starting...")
 
     while True:
         screenshot = take_screenshot()
 
-        best_task, best_comparison = None, float("-inf")
+        best_action, best_comparison = None, float("-inf")
 
-        for task_name in tasks:
-            task_data = tasks[task_name]
+        for task_name, task_data in tasks.items():
 
-            comparison = imageCompare.compare(screenshot, mkpath("tasks", task_name, task_data["trigger"]), task_data["crop"])
+            comparison = imageCompare.compare(screenshot, task_data["trigger"], task_data["trigger_region"])
 
             if comparison >= (task_data["trigger_threshold"] if "trigger_threshold" in task_data else INITIAL_COMPARE_THRESHOLD) and \
                     comparison > best_comparison:
                 best_comparison = comparison
-                best_task = task_name
+                best_action = task_name
 
-        if best_task is not None:
-            print("Triggered task \"{}\"".format(best_task))
+        if best_action is not None:
+            print("Triggered task \"{}\"".format(best_action))
 
             execute_action("wait", 0.1)
 
-            actions = tasks[best_task]["actions"]
+            actions = tasks[best_action]["actions"]
 
             if isinstance(actions, list):
                 for action in actions:
                     execute_action(action[0], *action[1:])
             else:
-                if not actions.run(screenshot):
-                    print("Task \"{}\" failed!".format(best_task))
+                if not actions.run(screenshot, task_data):
+                    print("Task \"{}\" failed!".format(best_action))
                     execute_action("wait", 1)
 
-        screenshot.close()
+        del screenshot
 
         # print("Iteration")
 

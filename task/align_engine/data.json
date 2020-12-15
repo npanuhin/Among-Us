@@ -1,0 +1,5 @@
+{
+	"trigger_region": [514, 93, 1406, 986],
+	"trigger": "reference.png",
+	"actions": "align_engine"
+}
