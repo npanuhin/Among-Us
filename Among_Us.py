@@ -6,9 +6,8 @@ import pyautogui
 
 from time import sleep
 from PIL import ImageGrab
-# from fuzzywuzzy import process
-# from traceback import format_exc
 from json import load as json_load
+# from itertools import chain as generator_chain
 import importlib
 import sys
 import os
@@ -110,7 +109,7 @@ def main():
 
             comparison = imageCompare.compare(screenshot, mkpath("tasks", task_name, task_data["trigger"]), task_data["crop"])
 
-            if comparison > (task_data["trigger_threshold"] if "trigger_threshold" in task_data else INITIAL_COMPARE_THRESHOLD) and \
+            if comparison >= (task_data["trigger_threshold"] if "trigger_threshold" in task_data else INITIAL_COMPARE_THRESHOLD) and \
                     comparison > best_comparison:
                 best_comparison = comparison
                 best_task = task_name
