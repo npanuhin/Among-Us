@@ -10,7 +10,7 @@ def run(screenshot, task_data):
     while True:
         if imageCompare.compare(
             take_screenshot(),
-            mkpath("tasks", "reactor_meltdown", "reference.png"), crop=task_data["trigger_region"]
+            mkpath("sabotage", "reactor_meltdown", "reference.png"), crop=task_data["trigger_region"]
         ) < INITIAL_COMPARE_THRESHOLD:
             break
         execute_action("wait", 0.5)

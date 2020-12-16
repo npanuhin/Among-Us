@@ -1,5 +1,6 @@
 {
 	"trigger_region": [514, 93, 1406, 986],
 	"trigger": "reference.png",
+	"trigger_threshold": 75,
 	"actions": "align_engine"
 }

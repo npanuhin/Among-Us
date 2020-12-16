@@ -7,6 +7,6 @@
 		["wait", 0.2],
 		["press_key", "esc"],
 
-		["wait", 2]
+		["wait", 1.5]
 	]
 }

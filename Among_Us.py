@@ -11,10 +11,9 @@ import importlib
 import sys
 import os
 
-
 from compare import ImageCompare
 
-INITIAL_COMPARE_THRESHOLD = 90
+INITIAL_COMPARE_THRESHOLD = 92
 
 imageCompare = ImageCompare()
 
