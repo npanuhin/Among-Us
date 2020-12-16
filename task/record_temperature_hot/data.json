@@ -1,0 +1,5 @@
+{
+	"trigger_region": [1356, 102, 1533, 742],
+	"trigger": "reference.png",
+	"actions": "record_temperature_hot"
+}
