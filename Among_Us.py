@@ -7,7 +7,6 @@ import pyautogui
 from time import sleep
 from PIL import ImageGrab
 from json import load as json_load
-# from itertools import chain as generator_chain
 import importlib
 import sys
 import os
