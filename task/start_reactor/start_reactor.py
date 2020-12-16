@@ -44,3 +44,5 @@ def run(screenshot, task_data):
             break
 
     execute_action("wait", 1)
+
+    return True

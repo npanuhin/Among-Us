@@ -1,0 +1,12 @@
+{
+	"trigger_region": [780, 60, 1140, 300],
+	"trigger": "reference.png",
+	"actions": [
+		["mouse_move", 960, 180],
+		["mouse_press"],
+		["wait", 5],
+		["mouse_release"],
+
+		["wait", 1]
+	]
+}
