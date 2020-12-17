@@ -1,7 +1,7 @@
 from Among_Us import execute_action
 
 
-def run(screenshot, task_data):
+def run(screenshot, task_data, trigger):
 
     leavers_y = 786
 

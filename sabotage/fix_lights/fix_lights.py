@@ -1,6 +1,6 @@
 from Among_Us import execute_action
 
-def run(screenshot, task_data):
+def run(screenshot, task_data, trigger):
 
     x_positions = (613, 790, 963, 1138, 1312)
 

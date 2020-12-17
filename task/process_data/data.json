@@ -1,6 +1,7 @@
 {
-	"trigger_region": [329, 72, 1590, 1054],
-	"trigger": "reference.png",
+	"triggers": [
+		["reference.png", [329, 72, 1590, 1054]]
+	],
 	"actions": [
 		["mouse_move", 963, 922],
 		["mouse_click"],

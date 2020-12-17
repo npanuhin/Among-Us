@@ -1,6 +1,6 @@
 {
-	"trigger_region": [397, 203, 1521, 875],
-	"trigger": "reference.png",
-	"trigger_threshold": 80,
+	"triggers": [
+		["reference.png", [397, 203, 1521, 875], 80]
+	],
 	"actions": "chart_course"
 }

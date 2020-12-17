@@ -5,7 +5,7 @@ def count_x(image, y):
     return round(((y - (image.size[1] // 2)) / 42.5) ** 2 + 70)
 
 
-def run(screenshot, task_data):
+def run(screenshot, task_data, trigger):
     crop = (1145, 114, 1383, 961)
 
     screenshot = screenshot.crop(crop).convert('L')

@@ -1,5 +1,6 @@
 {
-	"trigger_region": [970, 204, 1558, 875],
-	"trigger": "reference.png",
+	"triggers": [
+		["reference.png", [970, 204, 1558, 875]]
+	],
 	"actions": "start_reactor"
 }

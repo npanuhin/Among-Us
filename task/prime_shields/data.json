@@ -1,5 +1,6 @@
 {
-	"trigger_region": [511, 91, 1409, 134],
-	"trigger": "reference.png",
+	"triggers": [
+		["reference.png", [511, 91, 1409, 134], 75]
+	],
 	"actions": "prime_shields"
 }

@@ -1,10 +1,11 @@
 {
-	"trigger_region": [512, 92, 1407, 968],
-	"trigger": "reference.png",
+	"triggers": [
+		["reference.png", [512, 92, 1407, 968]]
+	],
 	"actions": [
 		["mouse_move", 820, 820],
 		["mouse_click"],
-		["wait", 0.8],
+		["wait", 0.75],
 		["mouse_move", 560, 450],
 		["mouse_press"],
 		["mouse_move", 1400, 450, 1],

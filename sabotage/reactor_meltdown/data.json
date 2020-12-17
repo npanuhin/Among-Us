@@ -1,5 +1,6 @@
 {
-	"trigger_region": [514, 95, 1406, 986],
-	"trigger": "reference.png",
+	"triggers": [
+		["reference.png", [514, 95, 1406, 986]]
+	],
 	"actions": "reactor_meltdown"
 }

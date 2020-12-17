@@ -1,6 +1,6 @@
 {
-	"trigger_region": [514, 323, 1406, 756],
-	"trigger": "reference.png",
-	"trigger_threshold": 80,
+	"triggers": [
+		["reference.png", [514, 323, 1406, 756], 80]
+	],
 	"actions": "unlock_manifolds"
 }

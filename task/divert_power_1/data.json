@@ -1,5 +1,6 @@
 {
-	"trigger_region": [567, 577, 1350, 933],
-	"trigger": "reference.png",
+	"triggers": [
+		["reference.png", [567, 577, 1350, 933]]
+	],
 	"actions": "divert_power_1"
 }

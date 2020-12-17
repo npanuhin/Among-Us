@@ -1,5 +1,6 @@
 {
-	"trigger_region": [510, 935, 1409, 990],
-	"trigger": "reference.png",
+	"triggers": [
+		["reference.png", [510, 935, 1409, 990]]
+	],
 	"actions": "fix_lights"
 }
