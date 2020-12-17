@@ -140,7 +140,7 @@ def main():
         if best_action is not None:
             print("Triggered task \"{}\"".format(best_action))
 
-            execute_action("wait", 0.1)
+            execute_action("wait", 0.15)
 
             actions = tasks[best_action]["actions"]
 
@@ -154,7 +154,7 @@ def main():
 
         del screenshot
 
-        print("Iteration #{}".format(iteration_count))
+        # print("Iteration #{}".format(iteration_count))
         iteration_count += 1
 
 

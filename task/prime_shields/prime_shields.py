@@ -1,7 +1,7 @@
 from Among_Us import execute_action, take_screenshot
 
 
-def run(screenshot, task_data):
+def run(screenshot, task_data, trigger):
     shields_pos = [
         (730, 415),
         (960, 290),
