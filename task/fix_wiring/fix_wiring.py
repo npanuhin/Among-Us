@@ -1,6 +1,6 @@
 from Among_Us import execute_action
 
-def run(screenshot, task_data):
+def run(screenshot, task_data, trigger):
 
     left_wires_pos = [
         (59, 182),
@@ -17,11 +17,11 @@ def run(screenshot, task_data):
     ]
 
     left_wires = [
-        [c >= 126 for c in screenshot.getpixel((task_data["trigger_region"][0] + pos[0], task_data["trigger_region"][1] + pos[1]))]
+        [c >= 126 for c in screenshot.getpixel((trigger[1][0] + pos[0], trigger[1][1] + pos[1]))]
         for pos in left_wires_pos
     ]
     right_wires = [
-        [c >= 126 for c in screenshot.getpixel((task_data["trigger_region"][0] + pos[0], task_data["trigger_region"][1] + pos[1]))]
+        [c >= 126 for c in screenshot.getpixel((trigger[1][0] + pos[0], trigger[1][1] + pos[1]))]
         for pos in right_wires_pos
     ]
 
@@ -36,9 +36,9 @@ def run(screenshot, task_data):
         return False
 
     for i, j in enumerate(wire_map):
-        execute_action("mouse_move", task_data["trigger_region"][0] + left_wires_pos[i][0], task_data["trigger_region"][1] + left_wires_pos[i][1])
+        execute_action("mouse_move", trigger[1][0] + left_wires_pos[i][0], trigger[1][1] + left_wires_pos[i][1])
         execute_action("mouse_press")
-        execute_action("mouse_move", task_data["trigger_region"][0] + right_wires_pos[j][0], task_data["trigger_region"][1] + right_wires_pos[j][1], 0.1)
+        execute_action("mouse_move", trigger[1][0] + right_wires_pos[j][0], trigger[1][1] + right_wires_pos[j][1], 0.1)
         execute_action("mouse_release")
 
     execute_action("wait", 1)

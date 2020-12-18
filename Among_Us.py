@@ -1,59 +1,25 @@
 import pyautogui
-# import win32gui
-# from win32api import GetSystemMetrics
-# import win32con
-# import win32ui
 
 from time import sleep
-from PIL import ImageGrab
+from PIL.Image import NEAREST
 from json import load as json_load
 import importlib
 import sys
 import os
 
-from compare import ImageCompare
+IMAGE_RESIZE_FUNC = NEAREST
 
 INITIAL_TRIGGER_THRESHOLD = 90
 
-imageCompare = ImageCompare()
-
-
 TASK_TYPES = ("task", "sabotage")
+
+from image_api import ImageCompare, take_screenshot
+
+imageCompare = ImageCompare(IMAGE_RESIZE_FUNC).compare
 
 
 def mkpath(*paths):
     return os.path.normpath(os.path.join(*paths))
-
-
-def take_screenshot(path="screen.png"):
-    return ImageGrab.grab()
-
-    # hwnd = win32gui.GetDesktopWindow()
-    # width = GetSystemMetrics(win32con.SM_CXVIRTUALSCREEN)
-    # height = GetSystemMetrics(win32con.SM_CYVIRTUALSCREEN)
-    # x = GetSystemMetrics(win32con.SM_XVIRTUALSCREEN)
-    # y = GetSystemMetrics(win32con.SM_YVIRTUALSCREEN)
-
-    # hwndDC = win32gui.GetWindowDC(hwnd)
-    # mfcDC = win32ui.CreateDCFromHandle(hwndDC)
-    # saveDC = mfcDC.CreateCompatibleDC()
-
-    # saveBitMap = win32ui.CreateBitmap()
-    # saveBitMap.CreateCompatibleBitmap(mfcDC, width, height)
-    # saveDC.SelectObject(saveBitMap)
-    # saveDC.BitBlt((0, 0), (width, height), mfcDC, (x, y), win32con.SRCCOPY)
-
-    # # saveBitMap.SaveBitmapFile(saveDC, 'screenshot.bmp')
-
-    # bmpinfo = saveBitMap.GetInfo()
-    # bmpstr = saveBitMap.GetBitmapBits(True)
-    # image = Image.frombuffer('RGB', (bmpinfo['bmWidth'], bmpinfo['bmHeight']), bmpstr, 'raw', 'BGRX', 0, 1)
-
-    # mfcDC.DeleteDC()
-    # saveDC.DeleteDC()
-    # win32gui.ReleaseDC(hwnd, hwndDC)
-
-    # return image
 
 
 def execute_action(action, *args):
@@ -129,7 +95,7 @@ def main():
         for task_name, task_data in tasks.items():
             for trigger in task_data["triggers"]:
 
-                comparison = imageCompare.compare(screenshot, trigger[0], trigger[1])
+                comparison = imageCompare(screenshot, trigger[0], trigger[1])
 
                 if comparison >= (trigger[2] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD) and \
                         comparison > best_comparison:

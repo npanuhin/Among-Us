@@ -1,7 +1,7 @@
 from Among_Us import mkpath, take_screenshot, imageCompare, execute_action
 
 
-def run(screenshot, task_data):
+def run(screenshot, task_data, trigger):
     left_box = (482, 424, 830, 772)
     right_box = (1086, 424)
 
@@ -14,8 +14,8 @@ def run(screenshot, task_data):
 
     while True:
         screenshot = take_screenshot()
-        if imageCompare.compare(screenshot, mkpath("task", "start_reactor", "waiting.png"), crop=task_data["trigger_region"]) >= \
-                imageCompare.compare(screenshot, mkpath("task", "start_reactor", "reference.png"), crop=task_data["trigger_region"]) and order:
+        if imageCompare(screenshot, mkpath("task", "start_reactor", "waiting.png"), crop=trigger[1]) >= \
+                imageCompare(screenshot, mkpath("task", "start_reactor", "reference.png"), crop=trigger[1]) and order:
             # print(order)
 
             for x, y in order:

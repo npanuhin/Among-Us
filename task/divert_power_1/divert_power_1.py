@@ -9,7 +9,7 @@ def run(screenshot, task_data, trigger):
 
     left_pos, right_pos = float("inf"), float("-inf")
 
-    for x in range(task_data["trigger_region"][0], task_data["trigger_region"][2] + 1):
+    for x in range(trigger[1][0], trigger[1][2] + 1):
         if screenshot.getpixel((x, leavers_y))[0] >= 250:
             left_pos = min(left_pos, x)
             right_pos = max(right_pos, x)

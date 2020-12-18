@@ -1,7 +1,7 @@
-from Among_Us import mkpath, imageCompare, execute_action
+from Among_Us import mkpath, imageCompare, execute_action  # , IMAGE_RESIZE_FUNC
 import os
 
-def run(screenshot, task_data):
+def run(screenshot, task_data, trigger):
 
     cell_size = (130, 130)
 
@@ -11,7 +11,7 @@ def run(screenshot, task_data):
     order = [None] * 10
 
     for i, image in enumerate(numbers):
-        # image = image.resize((32, 32), NEAREST).convert('1')
+        # image = image.resize((32, 32), IMAGE_RESIZE_FUNC).convert('1')
         # image.save(mkpath("task", "unlock_manifolds", "numbers", str(i) + "_.png"))
 
         best_number, best_comparison = None, float("-inf")
@@ -19,7 +19,7 @@ def run(screenshot, task_data):
         for filename in os.listdir(mkpath("task", "unlock_manifolds", "numbers")):
             number = int(os.path.splitext(filename)[0])
 
-            comparison = imageCompare.compare(
+            comparison = imageCompare(
                 image,
                 mkpath("task", "unlock_manifolds", "numbers", filename),
                 resize=(32, 32),

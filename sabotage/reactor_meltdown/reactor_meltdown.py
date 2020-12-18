@@ -8,11 +8,13 @@ def run(screenshot, task_data, trigger):
     execute_action("mouse_press")
 
     while True:
-        if imageCompare.compare(
+        if imageCompare(
             take_screenshot(),
             mkpath("sabotage", "reactor_meltdown", "reference.png"), crop=trigger[2]
         ) < (trigger[3] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD):
+
             break
+
         execute_action("wait", 0.5)
 
     execute_action("mouse_release")
