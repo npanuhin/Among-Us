@@ -1,6 +1,6 @@
 {
 	"triggers": [
-		["reference.png", [511, 91, 1409, 134], 75]
+		["reference.png", [508, 915, 1409, 989]]
 	],
 	"actions": "prime_shields"
 }

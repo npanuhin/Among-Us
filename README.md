@@ -1,6 +1,5 @@
 <h1 align="center">Among Us auto player</h1>
 
-
 ## Installation
 
 1. Install [Python 3](https://www.python.org)

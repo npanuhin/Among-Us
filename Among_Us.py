@@ -162,6 +162,6 @@ if __name__ == "__main__":
     main()
 
     # sleep(3)
-    # take_screenshot().save(["reference.png")]
+    # take_screenshot().save("reference.png")
 
     # print("Compare:", compare("tasks/swipe_card/reference.png", take_screenshot(), [512, 92, 1407, 968]))
