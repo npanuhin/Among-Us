@@ -1,0 +1,28 @@
+{
+	"triggers": [
+		["reference.png", [678, 109, 1240, 971]]
+	],
+	"actions": [
+		["mouse_move", 505, 440],
+		["mouse_press"],
+		["mouse_move", 1055, 410],
+		["mouse_release"],
+
+		["mouse_move", 510, 630],
+		["mouse_press"],
+		["mouse_move", 860, 590],
+		["mouse_release"],
+
+		["mouse_move", 500, 320],
+		["mouse_press"],
+		["mouse_move", 850, 290],
+		["mouse_release"],
+
+		["mouse_move", 500, 750],
+		["mouse_press"],
+		["mouse_move", 1060, 730],
+		["mouse_release"],
+
+		["wait", 1]
+	]
+}

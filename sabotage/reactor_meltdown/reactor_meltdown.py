@@ -10,7 +10,7 @@ def run(screenshot, task_data, trigger):
     while True:
         if imageCompare(
             take_screenshot(),
-            mkpath("sabotage", "reactor_meltdown", "reference.png"), crop=trigger[2]
+            mkpath("sabotage", "reactor_meltdown", "reference.png"), crop=trigger[1]
         ) < (trigger[3] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD):
 
             break
