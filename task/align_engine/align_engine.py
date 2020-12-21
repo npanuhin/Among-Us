@@ -28,6 +28,6 @@ def run(screenshot, task_data, trigger):
     execute_action("mouse_press")
     execute_action("mouse_move", crop[0] + count_x(screenshot, screenshot.size[1] // 2), crop[1] + screenshot.size[1] // 2, 0)
     execute_action("mouse_release")
-    execute_action("wait", 1)
 
+    execute_action("wait", 1)
     return True

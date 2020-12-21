@@ -1,0 +1,6 @@
+{
+	"triggers": [
+		["reference.png", [1066, 93, 1406, 985]]
+	],
+	"actions": "calibrate_distributor"
+}
