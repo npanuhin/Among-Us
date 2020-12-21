@@ -79,7 +79,7 @@ def main():
             tasks[task_name] = task_data
 
     for task_name, task_data in tasks.items():
-        print("{}:\n{}".format(task_name, task_data))
+        print("{}: {}".format(task_name, task_data))
 
     print("Starting...")
 

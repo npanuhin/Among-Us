@@ -18,5 +18,6 @@ def run(screenshot, task_data, trigger):
         execute_action("wait", 0.5)
 
     execute_action("mouse_release")
+
     execute_action("wait", 1)
     return True

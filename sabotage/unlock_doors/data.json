@@ -1,0 +1,6 @@
+{
+	"triggers": [
+		["reference.png", [513, 866, 1407, 1079]]
+	],
+	"actions": "unlock_doors"
+}
