@@ -1,8 +1,9 @@
 from Among_Us import mkpath, execute_action, take_screenshot, imageCompare, INITIAL_TRIGGER_THRESHOLD
 
-def run(screenshot, task_data, trigger):
+hand_press = (973, 712)
 
-    hand_press = (973, 712)
+
+def run(screenshot, task_data, trigger):
 
     execute_action("mouse_move", *hand_press)
     execute_action("mouse_press")
@@ -11,7 +12,7 @@ def run(screenshot, task_data, trigger):
         if imageCompare(
             take_screenshot(),
             mkpath("sabotage", "reactor_meltdown", "reference.png"), crop=trigger[1]
-        ) < (trigger[3] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD):
+        ) < (trigger[2] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD):
 
             break
 

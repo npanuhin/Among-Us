@@ -1,13 +1,13 @@
 from Among_Us import execute_action, take_screenshot
 
+labels = [
+    (1235, 230, 1235, 310),
+    (1235, 500, 1235, 580),
+    (1235, 770, 1235, 835)
+]
+
 
 def run(screenshot, task_data, trigger):
-
-    labels = [
-        (1235, 230, 1235, 310),
-        (1235, 500, 1235, 580),
-        (1235, 770, 1235, 835)
-    ]
 
     for x, y, click_x, click_y in labels:
         execute_action("mouse_move", click_x, click_y)
@@ -18,4 +18,5 @@ def run(screenshot, task_data, trigger):
                 break
 
     execute_action("wait", 1)
+
     return True

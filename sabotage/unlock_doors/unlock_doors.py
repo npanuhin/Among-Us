@@ -1,11 +1,12 @@
 from Among_Us import execute_action
 
-def run(screenshot, task_data, trigger):
+left_column = 877
+right_column = 1210
+top_row = 220
+bottom_row = 800
 
-    left_column = 877
-    right_column = 1210
-    top_row = 220
-    bottom_row = 800
+
+def run(screenshot, task_data, trigger):
 
     for y in range(4):
         y = top_row + (bottom_row - top_row) / 3 * y
@@ -17,4 +18,5 @@ def run(screenshot, task_data, trigger):
                 execute_action("mouse_click")
 
     execute_action("wait", 1)
+
     return True

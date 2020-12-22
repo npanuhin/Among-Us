@@ -48,6 +48,8 @@ def execute_action(action, *args):
 
 
 def main():
+    print("Starting...")
+
     tasks = {}
 
     for task_type in TASK_TYPES:
@@ -81,13 +83,19 @@ def main():
     for task_name, task_data in tasks.items():
         print("{}: {}".format(task_name, task_data))
 
-    print("Starting...")
+    print("Compiling images...")
 
     # exit()
 
-    iteration_count = 0
+    # iteration_count = 0
+    compiled = False
+    logged_compiled = False
 
     while True:
+        if not logged_compiled and compiled:
+            logged_compiled = True
+            print("Watching...")
+
         screenshot = take_screenshot()
 
         best_action, best_comparison, best_trigger = None, float("-inf"), None
@@ -106,7 +114,7 @@ def main():
         if best_action is not None:
             print("Triggered task \"{}\"".format(best_action))
 
-            execute_action("wait", 0.15)
+            # execute_action("wait", 0.15)
 
             actions = tasks[best_action]["actions"]
 
@@ -118,10 +126,13 @@ def main():
                     print("Task \"{}\" failed!".format(best_action))
                     execute_action("wait", 1)
 
-        del screenshot
+            print("Watching...")
+
+        screenshot.close()
 
         # print("Iteration #{}".format(iteration_count))
-        iteration_count += 1
+        # iteration_count += 1
+        compiled = True
 
 
 if __name__ == "__main__":

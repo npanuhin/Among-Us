@@ -1,6 +1,6 @@
 {
 	"triggers": [
-		["reference.png", [510, 935, 1409, 990], 95]
+		["reference.png", [510, 935, 1409, 990], 97]
 	],
 	"actions": "fix_lights"
 }

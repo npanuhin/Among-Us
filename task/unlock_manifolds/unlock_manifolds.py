@@ -1,12 +1,16 @@
 from Among_Us import mkpath, imageCompare, execute_action  # , IMAGE_RESIZE_FUNC
 import os
 
+top_row_y = 398
+bottom_row_y = 552
+left_to_right = (589, 1202, 153)
+
+cell_size = (130, 130)
+
 def run(screenshot, task_data, trigger):
 
-    cell_size = (130, 130)
-
-    numbers = list(screenshot.crop((x, 398, x + cell_size[0], 398 + cell_size[1])) for x in range(589, 1202, 153)) + \
-        list(screenshot.crop((x, 552, x + cell_size[0], 552 + cell_size[1])) for x in range(589, 1202, 153))
+    numbers = list(screenshot.crop((x, top_row_y, x + cell_size[0], top_row_y + cell_size[1])) for x in range(*left_to_right)) + \
+        list(screenshot.crop((x, bottom_row_y, x + cell_size[0], bottom_row_y + cell_size[1])) for x in range(*left_to_right))
 
     order = [None] * 10
 

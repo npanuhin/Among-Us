@@ -1,20 +1,20 @@
 from Among_Us import execute_action
 
+left_wires_pos = [
+    (59, 182),
+    (59, 370),
+    (59, 555),
+    (59, 741)
+]
+
+right_wires_pos = [
+    (834, 182),
+    (834, 370),
+    (834, 555),
+    (834, 741)
+]
+
 def run(screenshot, task_data, trigger):
-
-    left_wires_pos = [
-        (59, 182),
-        (59, 370),
-        (59, 555),
-        (59, 741)
-    ]
-
-    right_wires_pos = [
-        (834, 182),
-        (834, 370),
-        (834, 555),
-        (834, 741)
-    ]
 
     left_wires = [
         [c >= 126 for c in screenshot.getpixel((trigger[1][0] + pos[0], trigger[1][1] + pos[1]))]

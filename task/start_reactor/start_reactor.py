@@ -1,11 +1,11 @@
 from Among_Us import mkpath, take_screenshot, imageCompare, execute_action
 
+left_box = (482, 424, 830, 772)
+right_box = (1086, 424)
+
+cell_distance = ((left_box[2] - left_box[0]) // 3, (left_box[3] - left_box[1]) // 3)
 
 def run(screenshot, task_data, trigger):
-    left_box = (482, 424, 830, 772)
-    right_box = (1086, 424)
-
-    cell_distance = ((left_box[2] - left_box[0]) // 3, (left_box[3] - left_box[1]) // 3)
 
     count = 5
 

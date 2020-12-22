@@ -1,13 +1,11 @@
 from Among_Us import execute_action
 
+top, bottom = 265, 814
+stars_x_pos = (566, 763, 959, 1157, 1353)
+pixel_threshold = (70, 100)
+
 
 def run(screenshot, task_data, trigger):
-
-    pixel_threshold = (70, 100)
-
-    top, bottom = 265, 814
-
-    stars_x_pos = (566, 763, 959, 1157, 1353)
 
     screenshot = screenshot.convert('L')
 
@@ -39,12 +37,12 @@ def run(screenshot, task_data, trigger):
 
         elif step == len(stars_x_pos) - 1:
             execute_action("mouse_move", x + 30, mouse_y, 0.5)
-            execute_action("wait", 0.2)
+            execute_action("wait", 0.05)
             execute_action("mouse_release")
 
         else:
             execute_action("mouse_move", x + 30, mouse_y, 0.5)
-            execute_action("wait", 0.2)
+            execute_action("wait", 0.05)
 
     execute_action("wait", 1)
 
