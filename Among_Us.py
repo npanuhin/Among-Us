@@ -11,7 +11,7 @@ IMAGE_RESIZE_FUNC = NEAREST
 
 INITIAL_TRIGGER_THRESHOLD = 90
 
-TASK_TYPES = ("task", "sabotage")
+TASK_TYPES = ("task", "sabotage", "other")
 
 from image_api import ImageCompare, take_screenshot
 
@@ -48,7 +48,10 @@ def execute_action(action, *args):
 
 
 def main():
-    print("Starting...")
+    print("Initializing...")
+
+    with open("settings.json", 'r', encoding="utf-8") as settings_file:
+        settings = json_load(settings_file, encoding="utf-8")
 
     tasks = {}
 
@@ -70,7 +73,8 @@ def main():
             for trigger in task_data["triggers"]:
                 assert isinstance(trigger, list) and (
                     len(trigger) == 2 or
-                    (len(trigger) == 3 and isinstance(trigger[2], int))
+                    (len(trigger) == 3 and isinstance(trigger[2], int)) or
+                    (len(trigger) == 4 and isinstance(trigger[2], int) and isinstance(trigger[3], int))
                 ) and \
                     isinstance(trigger[0], str) and isinstance(trigger[1], list) and \
                     len(trigger[1]) == 4 and (isinstance(trigger[1][i], int) for i in range(4)), \
@@ -79,6 +83,11 @@ def main():
                 trigger[0] = mkpath(task_type, task_name, trigger[0])
 
             tasks[task_name] = task_data
+
+    if "auto_task_open" in settings:
+        assert isinstance(settings["auto_task_open"], bool)
+        if not settings["auto_task_open"]:
+            del tasks["task_open"]
 
     for task_name, task_data in tasks.items():
         print("{}: {}".format(task_name, task_data))
@@ -103,7 +112,10 @@ def main():
         for task_name, task_data in tasks.items():
             for trigger in task_data["triggers"]:
 
-                comparison = imageCompare(screenshot, trigger[0], trigger[1])
+                if len(trigger) == 4:
+                    comparison = imageCompare(screenshot, trigger[0], trigger[1], bw_threshold=trigger[3])
+                else:
+                    comparison = imageCompare(screenshot, trigger[0], trigger[1])
 
                 if comparison >= (trigger[2] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD) and \
                         comparison > best_comparison:

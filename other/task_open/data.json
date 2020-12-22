@@ -1,0 +1,11 @@
+{
+	"triggers": [
+		["reference.png", [1728, 862, 1842, 961], 100, 180]
+	],
+	"actions": [
+		["mouse_move", 1793, 913],
+		["mouse_click"],
+
+		["wait", 0.5]
+	]
+}
