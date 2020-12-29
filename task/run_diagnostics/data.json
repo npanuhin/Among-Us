@@ -6,7 +6,7 @@
 		["mouse_move", 800, 945],
 		["mouse_click"],
 		["wait", 0.2],
-		["press_key", "esc"],
+		["key_press", "esc"],
 
 		["wait", 1]
 	]

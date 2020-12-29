@@ -2,12 +2,5 @@
 	"triggers": [
 		["reference.png", [513, 90, 1408, 801]]
 	],
-	"actions": [
-		["mouse_move", 1260, 935],
-		["mouse_click"],
-		["wait", 0.2],
-		["press_key", "esc"],
-
-		["wait", 1.5]
-	]
+	"actions": "inspect_sample"
 }

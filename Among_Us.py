@@ -43,7 +43,7 @@ def execute_action(action, *args):
     elif action == "mouse_doubleclick":
         pyautogui.doubleClick()
 
-    elif action == "press_key":
+    elif action == "key_press":
         pyautogui.press(args[0])
 
 
