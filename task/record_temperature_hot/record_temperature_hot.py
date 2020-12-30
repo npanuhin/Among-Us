@@ -7,7 +7,7 @@ def run(screenshot, task_data, trigger):
 
     while imageCompare(take_screenshot(), mkpath("task", "record_temperature_hot", "reference.png"), crop=trigger[1]) >= \
             (trigger[2] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD):
-        execute_action("wait", 0.2)
+        execute_action("wait", 0.1)
 
     execute_action("mouse_release")
 

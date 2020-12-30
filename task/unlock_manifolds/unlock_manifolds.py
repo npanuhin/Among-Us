@@ -47,7 +47,6 @@ def run(screenshot, task_data, trigger):
         else:
             execute_action("mouse_move", 589 + 153 * (pos % 5) + cell_size[0] // 2, 552 + cell_size[1] // 2)
         execute_action("mouse_click")
-        # execute_action("wait", 0.5)
 
     execute_action("wait", 1)
 

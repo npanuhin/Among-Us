@@ -21,7 +21,6 @@ def run(screenshot, task_data, trigger):
             for x, y in order:
                 execute_action("mouse_move", right_box[0] + x, right_box[1] + y)
                 execute_action("mouse_click")
-                # execute_action("wait", 0.3)
 
             order = []
             count -= 1

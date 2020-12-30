@@ -7,7 +7,7 @@
 		["mouse_press"],
 		["mouse_move", 1150, 730],
 		["mouse_release"],
-		["wait", 3],
+		["wait", 2.85],
 		["mouse_click"],
 
 		["wait", 0.5],
@@ -16,7 +16,7 @@
 		["mouse_press"],
 		["mouse_move", 1150, 730],
 		["mouse_release"],
-		["wait", 3],
+		["wait", 2.85],
 		["mouse_click"],
 
 		["wait", 1]

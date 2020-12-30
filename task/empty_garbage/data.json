@@ -6,9 +6,9 @@
 		["mouse_move", 1272, 420],
 		["mouse_press"],
 		["mouse_move", 1272, 874, 0],
-		["wait", 3],
+		["wait", 1.5],
 		["mouse_release"],
 
-		["wait", 2]
+		["wait", 2.5]
 	]
 }

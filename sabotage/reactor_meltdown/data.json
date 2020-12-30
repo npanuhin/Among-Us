@@ -1,6 +1,6 @@
 {
 	"triggers": [
-		["reference.png", [514, 95, 1406, 986]]
+		["reference.png", [514, 95, 1406, 986], 85]
 	],
 	"actions": "reactor_meltdown"
 }

@@ -16,7 +16,7 @@ def run(screenshot, task_data, trigger):
         cur_state = screenshot.getpixel((x, y))
         execute_action("mouse_move", x, y)
         execute_action("mouse_click")
-        execute_action("wait", 0.1)
+        execute_action("wait", 0.05)
         screenshot = take_screenshot()
         alternative_state = screenshot.getpixel((x, y))
 

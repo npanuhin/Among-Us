@@ -36,13 +36,13 @@ def run(screenshot, task_data, trigger):
             execute_action("mouse_press")
 
         elif step == len(stars_x_pos) - 1:
-            execute_action("mouse_move", x + 30, mouse_y, 0.5)
-            execute_action("wait", 0.05)
+            execute_action("mouse_move", x + 30, mouse_y, 0.3)
+            execute_action("wait", 0.01)
             execute_action("mouse_release")
 
         else:
-            execute_action("mouse_move", x + 30, mouse_y, 0.5)
-            execute_action("wait", 0.05)
+            execute_action("mouse_move", x + 30, mouse_y, 0.3)
+            execute_action("wait", 0.01)
 
     execute_action("wait", 1)
 
