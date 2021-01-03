@@ -1,0 +1,11 @@
+{
+	"triggers": [
+		["key_press", "Ctrl+Shift+Alt+F2"]
+	],
+	"actions": [
+		["wait", 0.5],
+		["text", "Among Us auto task solver that I am using right now: https://github.com/npanuhin/Among-Us  :)"],
+		["wait", 0.05],
+		["key_press", "Enter"]
+	]
+}

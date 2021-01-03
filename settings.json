@@ -1,3 +1,5 @@
 {
-	"auto_task_open": false
+	"disabled_tasks": [
+		"task_open"
+	]
 }

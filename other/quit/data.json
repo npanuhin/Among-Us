@@ -1,0 +1,8 @@
+{
+	"triggers": [
+		["key_press", "Ctrl+Shift+Alt+F3"]
+	],
+	"actions": [
+		["stop"]
+	]
+}

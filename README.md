@@ -7,3 +7,13 @@
 3. Run `py -3 -m pip install -r requirements.txt` in command prompt
 
 > This script requires 1920x1080 screen resolution
+
+## Usage
+
+##### Run:
+
+Run `Among_Us.py` (`py -3 -u Among_Us.py`)
+
+##### Stop:
+
+Press <kbd>Ctrl + Shift + F3</kbd> (for at least `0.1s`)

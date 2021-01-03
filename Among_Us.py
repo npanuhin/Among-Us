@@ -1,4 +1,5 @@
 import pyautogui
+import keyboard
 
 from time import sleep
 from PIL.Image import NEAREST
@@ -46,6 +47,14 @@ def execute_action(action, *args):
     elif action == "key_press":
         pyautogui.press(args[0])
 
+    elif action == "text":
+        pyautogui.write(args[0], interval=0.005)
+
+    elif action == "stop":
+        return False
+
+    return True
+
 
 def main():
     print("Initializing...")
@@ -71,23 +80,32 @@ def main():
                     raise ImportError(task_name)
 
             for trigger in task_data["triggers"]:
-                assert isinstance(trigger, list) and (
-                    len(trigger) == 2 or
-                    (len(trigger) == 3 and isinstance(trigger[2], int)) or
-                    (len(trigger) == 4 and isinstance(trigger[2], int) and isinstance(trigger[3], int))
-                ) and \
-                    isinstance(trigger[0], str) and isinstance(trigger[1], list) and \
-                    len(trigger[1]) == 4 and (isinstance(trigger[1][i], int) for i in range(4)), \
+                assert isinstance(trigger, list) and isinstance(trigger[0], str), \
                     "Error in {}/{}: {}".format(task_type, task_name, trigger)
 
-                trigger[0] = mkpath(task_type, task_name, trigger[0])
+                if trigger[0] == "key_press":
+                    assert len(trigger) == 2 and isinstance(trigger[1], str), \
+                        "Error in {}/{}: {}".format(task_type, task_name, trigger)
+
+                else:
+                    assert (
+                        len(trigger) == 2 or
+                        (len(trigger) == 3 and isinstance(trigger[2], int)) or
+                        (len(trigger) == 4 and isinstance(trigger[2], int) and isinstance(trigger[3], int))
+                    ) and isinstance(trigger[1], list) and \
+                        len(trigger[1]) == 4 and (isinstance(trigger[1][i], int) for i in range(4)), \
+                        "Error in {}/{}: {}".format(task_type, task_name, trigger)
+
+                    trigger[0] = mkpath(task_type, task_name, trigger[0])
 
             tasks[task_name] = task_data
 
-    if "auto_task_open" in settings:
-        assert isinstance(settings["auto_task_open"], bool)
-        if not settings["auto_task_open"]:
-            del tasks["task_open"]
+    if "disabled_tasks" in settings:
+        assert isinstance(settings["disabled_tasks"], list)
+        for disabled_task in settings["disabled_tasks"]:
+            assert isinstance(disabled_task, str)
+            if disabled_task in tasks:
+                del tasks[disabled_task]
 
     for task_name, task_data in tasks.items():
         print("{}: {}".format(task_name, task_data))
@@ -112,17 +130,24 @@ def main():
         for task_name, task_data in tasks.items():
             for trigger in task_data["triggers"]:
 
-                if len(trigger) == 4:
-                    comparison = imageCompare(screenshot, trigger[0], trigger[1], bw_threshold=trigger[3])
+                if trigger[0] == "key_press":
+                    if keyboard.is_pressed(trigger[1]):
+                        best_action = task_name
+                        best_trigger = trigger
+
                 else:
-                    comparison = imageCompare(screenshot, trigger[0], trigger[1])
+                    if len(trigger) == 4:
+                        comparison = imageCompare(screenshot, trigger[0], trigger[1], bw_threshold=trigger[3])
+                    else:
+                        comparison = imageCompare(screenshot, trigger[0], trigger[1])
 
-                if comparison >= (trigger[2] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD) and \
-                        comparison > best_comparison:
-                    best_comparison = comparison
-                    best_action = task_name
-                    best_trigger = trigger
+                    if comparison >= (trigger[2] if len(trigger) == 3 else INITIAL_TRIGGER_THRESHOLD) and \
+                            comparison > best_comparison:
+                        best_comparison = comparison
+                        best_action = task_name
+                        best_trigger = trigger
 
+        stop = False
         if best_action is not None:
             print("Triggered task \"{}\"".format(best_action))
 
@@ -132,19 +157,25 @@ def main():
 
             if isinstance(actions, list):
                 for action in actions:
-                    execute_action(action[0], *action[1:])
+                    if not execute_action(action[0], *action[1:]):
+                        stop = True
+                        break
             else:
                 if not actions.run(screenshot, tasks[best_action], best_trigger):
                     print("Task \"{}\" failed!".format(best_action))
                     execute_action("wait", 1)
 
-            print("Watching...")
+            if not stop:
+                print("Watching...")
 
         screenshot.close()
 
         # print("Iteration #{}".format(iteration_count))
         # iteration_count += 1
         compiled = True
+
+        if stop:
+            break
 
 
 if __name__ == "__main__":
