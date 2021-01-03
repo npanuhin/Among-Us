@@ -35,6 +35,9 @@ def run(screenshot, task_data, trigger):
             else:
                 continue
             break
+        else:
+            continue
+        break
 
         execute_action("wait", 0.1)
 

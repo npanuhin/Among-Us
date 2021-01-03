@@ -1,6 +1,6 @@
 {
 	"triggers": [
-		["reference.png", [629, 17, 1282, 1048]]
+		["reference.png", [685, 102, 1227, 980]]
 	],
 	"actions": [
 		["mouse_move", 780, 220],
