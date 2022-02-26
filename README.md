@@ -1,6 +1,6 @@
 <h1 align="center">Among Us auto player</h1>
 
-> This project is no longer maintained. You can [fork](https://github.com/npanuhin/Among-Us/fork) and continue working on it.
+> This project was whipped up in a couple of days mainly for educational purposes. I stopped working on it long ago when the game lost popularity. However, you can still [fork](https://github.com/npanuhin/Among-Us/fork) and continue working on this auto player.<br>I hope you can still get this code running...
 
 ## Installation
 
